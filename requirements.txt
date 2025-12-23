@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+redis
+requests
+pydantic
+playwright
+opencv-python
+python-dotenv
+google-generativeai
+websockets
+aiohttp
+

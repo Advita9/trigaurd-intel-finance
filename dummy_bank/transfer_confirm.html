@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Transfer</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Confirm Transfer</h1>
+
+    <p>Recipient: <strong id="recipient"></strong></p>
+    <p>Amount: <strong id="amt"></strong> INR</p>
+
+    <button id="confirmBtn">Confirm Transfer</button>
+</div>
+
+<script>
+document.getElementById("recipient").innerText =
+    localStorage.getItem("transfer_recipient");
+
+document.getElementById("amt").innerText =
+    localStorage.getItem("transfer_amount");
+
+document.getElementById("confirmBtn").onclick = () => {
+    location.href = "transfer_success.html";
+};
+</script>
+
+</body>
+</html>

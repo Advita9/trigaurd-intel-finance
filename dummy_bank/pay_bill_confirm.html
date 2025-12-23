@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Bill Payment</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Confirm Bill Payment</h1>
+
+    <p>Biller: <span id="biller"></span></p>
+    <p>Amount: <span id="amt"></span></p>
+
+    <button id="confirmBtn">Submit Payment</button>
+</div>
+
+<script>
+document.getElementById("biller").innerText = localStorage.getItem("bill_biller");
+document.getElementById("amt").innerText = localStorage.getItem("bill_amount");
+document.getElementById("confirmBtn").onclick = () => {
+    location.href = "pay_success.html";
+};
+</script>
+
+</body>
+</html>

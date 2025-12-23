@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account Overview</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 8px; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+    th { font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Account Overview</h1>
+
+  <!-- BALANCE -->
+  <div class="card">
+    <h2>Current Balance</h2>
+    <h3 id="balance">₹ --</h3>
+  </div>
+
+  <!-- BILLS -->
+  <div class="card">
+    <h2>Bills Due</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody id="bills"></tbody>
+    </table>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="card">
+    <h2>Transaction History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Details</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody id="history"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+async function loadProfile() {
+  const res = await fetch("/profile");
+  const data = await res.json();
+
+  // Balance
+  document.getElementById("balance").innerText =
+    "₹ " + data.balance.toLocaleString("en-IN");
+
+  // Bills
+  const billsEl = document.getElementById("bills");
+  billsEl.innerHTML = "";
+  Object.entries(data.bills).forEach(([provider, amt]) => {
+    billsEl.innerHTML += `
+      <tr>
+        <td>${provider.toUpperCase()}</td>
+        <td>₹ ${amt}</td>
+      </tr>`;
+  });
+
+  // History
+  const historyEl = document.getElementById("history");
+  historyEl.innerHTML = "";
+  data.history.slice().reverse().forEach(txn => {
+    historyEl.innerHTML += `
+      <tr>
+        <td>${txn.type}</td>
+        <td>${txn.details || "-"}</td>
+        <td>₹ ${txn.amount}</td>
+      </tr>`;
+  });
+}
+
+loadProfile();
+</script>
+
+</body>
+</html>
+
+

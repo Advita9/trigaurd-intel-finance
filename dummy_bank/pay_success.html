@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Bill Payment Successful</h1>
+
+    <p>
+        ₹<strong id="amt"></strong> paid to
+        <strong id="biller"></strong>
+    </p>
+
+    <a href="index.html">Back to Home</a>
+</div>
+
+<script>
+document.getElementById("amt").innerText =
+    localStorage.getItem("bill_amount");
+
+document.getElementById("biller").innerText =
+    localStorage.getItem("bill_biller");
+</script>
+
+</body>
+</html>

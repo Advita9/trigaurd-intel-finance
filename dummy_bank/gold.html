@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Buy Digital Gold</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Buy Digital Gold</h1>
+
+    <label>Enter Amount (INR):</label>
+    <input
+        id="amount"
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9]+"
+        placeholder="500"
+    />
+
+    <button id="proceed-btn">Proceed</button>
+
+    <p id="error" style="color:red; display:none;">
+        Invalid amount. Please enter a positive value.
+    </p>
+</div>
+
+<script>
+document.getElementById("proceed-btn").onclick = function () {
+    const amtInput = document.getElementById("amount");
+    const value = amtInput.value.trim();
+    const amount = Number(value);
+
+    if (!value || isNaN(amount) || amount <= 0) {
+        document.getElementById("error").style.display = "block";
+        return;
+    }
+
+    window.location.href = "gold_confirm.html?amount=" + amount;
+};
+</script>
+
+</body>
+</html>

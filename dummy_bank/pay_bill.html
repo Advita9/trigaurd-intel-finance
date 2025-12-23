@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pay Electricity Bill</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Pay Electricity Bill</h1>
+
+    <label>Select Biller:</label>
+    <select id="biller">
+        <option value="adani">Adani Power</option>
+        <option value="tata">Tata Power</option>
+    </select>
+
+    <label>Enter Amount:</label>
+    <input id="amount" type="number" />
+
+    <button id="proceed-btn" onclick="next()">Proceed</button>
+
+    <p id="error" style="color:red; display:none;">Enter a valid bill amount.</p>
+</div>
+
+<script>
+function next() {
+    const amt = parseFloat(document.getElementById("amount").value);
+    if (amt <= 0 || isNaN(amt)) {
+        document.getElementById("error").style.display = "block";
+        return;
+    }
+    localStorage.setItem("bill_amount", amt);
+    localStorage.setItem("bill_biller", document.getElementById("biller").value);
+    location.href = "pay_bill_confirm.html";
+}
+</script>
+
+</body>
+</html>

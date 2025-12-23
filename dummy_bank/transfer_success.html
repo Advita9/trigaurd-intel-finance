@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transfer Successful</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Transfer Successful</h1>
+
+    <p>
+        <strong id="amt"></strong> has been transferred to
+        <strong id="recipient"></strong>.
+    </p>
+
+    <a href="index.html">Back to Home</a>
+</div>
+
+<script>
+document.getElementById("recipient").innerText =
+    localStorage.getItem("transfer_recipient");
+
+document.getElementById("amt").innerText =
+    localStorage.getItem("transfer_amount");
+</script>
+
+</body>
+</html>

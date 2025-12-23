@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bill Paid</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+  <h1>✅ Bill Paid Successfully</h1>
+
+  <p>
+    Electricity bill of ₹<strong id="amount"></strong> for Consumer ID
+    <strong id="consumer"></strong> has been paid.
+  </p>
+
+  <a href="index.html">Back to Home</a>
+</div>
+
+<script>
+document.getElementById("consumer").innerText =
+  localStorage.getItem("bill_consumer");
+
+document.getElementById("amount").innerText =
+  localStorage.getItem("bill_amount");
+</script>
+
+</body>
+</html>

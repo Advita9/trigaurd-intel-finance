@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pay Electricity Bill</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+  <h1>Pay Electricity Bill</h1>
+
+  <label>Consumer ID:</label>
+  <input id="consumer" type="text" placeholder="ADANI12345" />
+
+  <label>Amount (INR):</label>
+  <input id="amount" type="text" inputmode="numeric" placeholder="750" />
+
+  <button id="proceed-btn" onclick="proceed()">Proceed</button>
+
+  <p id="error" style="color:red; display:none;">
+    Invalid bill details.
+  </p>
+</div>
+
+<script>
+function proceed() {
+  const consumer = document.getElementById("consumer").value.trim();
+  const amount = Number(document.getElementById("amount").value.trim());
+
+  if (!consumer || isNaN(amount) || amount <= 0) {
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+
+  localStorage.setItem("bill_consumer", consumer);
+  localStorage.setItem("bill_amount", amount);
+
+  window.location.href = "bill_confirm.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Confirm Gold Purchase</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Confirm Purchase</h1>
+
+    <p>Amount: <span id="amt"></span> INR</p>
+    <p>Type: Digital Gold</p>
+
+    <button id="confirmBtn">Confirm Payment</button>
+</div>
+
+
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const amount = params.get("amount");
+
+document.getElementById("amt").innerText = amount;
+
+document.getElementById("confirmBtn").onclick = () => {
+    window.location.href = "gold_success.html";
+};
+</script>
+
+<!-- <div id="success">
+  ✅ Digital Gold purchase successful
+</div> -->
+
+<!-- <script>
+document.getElementById("amt").innerText = localStorage.getItem("gold_amount");
+document.getElementById("confirmBtn").onclick = () => {
+    location.href = "gold_success.html";
+};
+</script>
+
+</body>
+</html> -->

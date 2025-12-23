@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FinAgent Control Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .box {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+    }
+
+    .paused {
+      color: red;
+      font-weight: bold;
+    }
+
+    .running {
+      color: green;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 10px 16px;
+      font-size: 14px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      border: 1px solid #ccc;
+    }
+
+    pre {
+      background: #111;
+      color: #0f0;
+      padding: 10px;
+      height: 200px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>FinAgent Dashboard</h1>
+
+  <div class="box">
+    <div>Status: <span id="status">Loading...</span></div>
+    <div>Risk Reason: <span id="risk">None</span></div>
+  </div>
+
+  <div class="box">
+    <h3>Screenshot</h3>
+    <img id="screenshot" style="max-width:100%"/>
+  </div>
+
+  <div class="box">
+    <h3>Execution Logs</h3>
+    <pre id="logs"></pre>
+  </div>
+
+  <div class="box">
+    <button onclick="approve()">Approve</button>
+    <button onclick="reject()">Reject</button>
+  </div>
+
+<script>
+async function fetchState() {
+  const res = await fetch("http://127.0.0.1:8001/state");
+  const data = await res.json();
+
+  // Status
+  const statusEl = document.getElementById("status");
+  statusEl.textContent = data.paused ? "PAUSED" : "RUNNING";
+  statusEl.className = data.paused ? "paused" : "running";
+
+  // Risk
+  document.getElementById("risk").textContent = data.risk || "None";
+
+  // Logs
+  document.getElementById("logs").textContent =
+    (data.logs || []).reverse().join("\n");
+
+  // Screenshot
+  if (data.screenshot) {
+    document.getElementById("screenshot").src =
+      "data:image/png;base64," + data.screenshot;
+  }
+}
+
+async function approve() {
+  await fetch("http://127.0.0.1:8001/approve", { method: "POST" });
+}
+
+async function reject() {
+  await fetch("http://127.0.0.1:8001/reject", { method: "POST" });
+}
+
+// Poll every second
+setInterval(fetchState, 1000);
+fetchState();
+</script>
+
+</body>
+</html>
