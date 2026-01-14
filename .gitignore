@@ -1,4 +1,47 @@
-venv/
+# Secrets
+.env
+.env.*
+*.env
+!.env.example
+**/.env
+**/.env.*
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual envs
 venv/
+.venv/
+env/
+ENV/
+
+# Node / frontend
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Databases
+*.sqlite
+*.db
+
+# Caches
+.cache/
